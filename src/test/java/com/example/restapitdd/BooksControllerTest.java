@@ -31,6 +31,7 @@ public class BooksControllerTest {
     public void test_getBooksController_returnsASingleBook() throws Exception {
         mockMvc.perform(get("/api/books/hardcoded"))
                 .andExpect(jsonPath("$[0].name", equalTo("TDD by Example")))
+                .andExpect(jsonPath("$[0].author", equalTo("Kent Beck")))
         ;
     }
 }
