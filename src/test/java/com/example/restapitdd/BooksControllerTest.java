@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,10 +28,9 @@ public class BooksControllerTest {
     }
 
     @Test
-    public void test_getBooksController_returnsAnEmptyList() throws Exception {
+    public void test_getBooksController_returnsASingleBook() throws Exception {
         mockMvc.perform(get("/api/books/hardcoded"))
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(jsonPath("$[0].name", equalTo("TDD by Example")))
+        ;
     }
-
-
 }
