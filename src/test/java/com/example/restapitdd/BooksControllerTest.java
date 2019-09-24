@@ -49,19 +49,6 @@ public class BooksControllerTest {
     @Test
     public void test_getBooksController_returnsASingleBook_dynamic() throws Exception {
         stubBooksRepository.setGetAll_returnValue(
-                Collections.singletonList(new Book("Refactoring", "Martin Fowler"))
-        );
-
-        mockMvc.perform(get("/api/books/dynamic"))
-                .andExpect(jsonPath("$[0].name", equalTo("Refactoring")))
-                .andExpect(jsonPath("$[0].author", equalTo("Martin Fowler")))
-        ;
-    }
-
-    // TDD Approach: Triangulation
-    @Test
-    public void test_getBooksController_returnsADifferentBook_dynamic() throws Exception {
-        stubBooksRepository.setGetAll_returnValue(
                 Collections.singletonList(new Book("Clean Code", "Robert Martin"))
         );
 
