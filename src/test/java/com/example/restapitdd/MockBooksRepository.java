@@ -19,6 +19,11 @@ public class MockBooksRepository implements BooksRepository {
         return null;
     }
 
+    @Override
+    public Book create(NewBook newBook) {
+        return null;
+    }
+
     public void verify_getById(long expectedId) {
         assertThat(get_argument_id, equalTo(expectedId));
     }

@@ -6,4 +6,6 @@ public interface BooksRepository {
     List<Book> getAll();
 
     Book getById(long id);
+
+    Book create(NewBook newBook);
 }

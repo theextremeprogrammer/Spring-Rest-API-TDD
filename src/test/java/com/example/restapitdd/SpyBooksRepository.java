@@ -3,11 +3,14 @@ package com.example.restapitdd;
 import java.util.List;
 
 public class SpyBooksRepository implements BooksRepository {
-    private long get_argument_id;
-
     @Override
     public List<Book> getAll() {
         return null;
+    }
+
+    private long get_argument_id;
+    public long getGet_argument_id() {
+        return get_argument_id;
     }
 
     @Override
@@ -16,7 +19,8 @@ public class SpyBooksRepository implements BooksRepository {
         return null;
     }
 
-    public long getGet_argument_id() {
-        return get_argument_id;
+    @Override
+    public Book create(NewBook newBook) {
+        return null;
     }
 }

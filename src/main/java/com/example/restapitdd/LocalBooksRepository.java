@@ -15,4 +15,9 @@ public class LocalBooksRepository implements BooksRepository {
     public Book getById(long id) {
         return null;
     }
+
+    @Override
+    public Book create(NewBook newBook) {
+        return null;
+    }
 }

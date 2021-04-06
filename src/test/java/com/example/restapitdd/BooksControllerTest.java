@@ -150,4 +150,47 @@ public class BooksControllerTest {
 
         assertThat(longArgumentCaptor.getValue(), equalTo(999L));
     }
+
+    @Test
+    public void getBooks_returnsBooks_usingFake() throws Exception {
+        FakeBooksRepository fakeBooksRepository = new FakeBooksRepository();
+        BooksController booksController = new BooksController(fakeBooksRepository);
+
+        fakeBooksRepository.create(new NewBook("TDD by Example", "Kent Beck"));
+        fakeBooksRepository.create(new NewBook("Refactoring", "Martin Fowler"));
+
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(booksController)
+                .build();
+
+
+        mockMvc.perform(get("/api/books/dynamic"))
+                .andExpect(jsonPath("$[0].id", equalTo(1)))
+                .andExpect(jsonPath("$[0].name", equalTo("TDD by Example")))
+                .andExpect(jsonPath("$[0].author", equalTo("Kent Beck")))
+
+                .andExpect(jsonPath("$[1].id", equalTo(2)))
+                .andExpect(jsonPath("$[1].name", equalTo("Refactoring")))
+                .andExpect(jsonPath("$[1].author", equalTo("Martin Fowler")))
+        ;
+    }
+
+    @Test
+    public void getBook_usingFake() throws Exception {
+        FakeBooksRepository fakeBooksRepository = new FakeBooksRepository();
+        BooksController booksController = new BooksController(fakeBooksRepository);
+
+        Book refactoringBook = fakeBooksRepository.create(new NewBook("Refactoring", "Martin Fowler"));
+
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(booksController)
+                .build();
+
+
+        mockMvc.perform(get("/api/books/dynamic/1"))
+                .andExpect(jsonPath("$.id", equalTo(1)))
+                .andExpect(jsonPath("$.name", equalTo("Refactoring")))
+                .andExpect(jsonPath("$.author", equalTo("Martin Fowler")))
+        ;
+    }
 }
