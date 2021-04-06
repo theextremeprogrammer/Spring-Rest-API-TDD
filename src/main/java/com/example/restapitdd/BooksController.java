@@ -17,7 +17,7 @@ public class BooksController {
 
     @GetMapping("/hardcoded")
     public List<Book> getBooksHardcoded() {
-        Book tddBook = new Book("TDD by Example", "Kent Beck");
+        Book tddBook = new Book(1L, "TDD by Example", "Kent Beck");
         return singletonList(tddBook);
     }
 

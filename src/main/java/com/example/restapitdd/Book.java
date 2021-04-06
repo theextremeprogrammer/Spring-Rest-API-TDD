@@ -3,12 +3,18 @@ package com.example.restapitdd;
 import java.util.Objects;
 
 public class Book {
+    private long id;
     private String name;
     private String author;
 
-    public Book(String name, String author) {
+    public Book(long id, String name, String author) {
+        this.id = id;
         this.name = name;
         this.author = author;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -24,19 +30,21 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(name, book.name) &&
+        return id == book.id &&
+                Objects.equals(name, book.name) &&
                 Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, author);
+        return Objects.hash(id, name, author);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 '}';
     }
