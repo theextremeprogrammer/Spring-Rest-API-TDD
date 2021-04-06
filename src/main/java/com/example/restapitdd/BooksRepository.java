@@ -5,5 +5,5 @@ import java.util.List;
 public interface BooksRepository {
     List<Book> getAll();
 
-    Book get();
+    Book get(long id);
 }

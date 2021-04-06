@@ -1,11 +1,10 @@
 package com.example.restapitdd;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-@Repository
-public class LocalBooksRepository implements BooksRepository {
+public class SpyBooksRepository implements BooksRepository {
+    private long get_argument_id;
+
     @Override
     public List<Book> getAll() {
         return null;
@@ -13,6 +12,11 @@ public class LocalBooksRepository implements BooksRepository {
 
     @Override
     public Book get(long id) {
+        get_argument_id = id;
         return null;
+    }
+
+    public long getGet_argument_id() {
+        return get_argument_id;
     }
 }

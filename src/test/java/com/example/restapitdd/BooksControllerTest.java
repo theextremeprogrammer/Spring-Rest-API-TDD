@@ -7,8 +7,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Collections;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -96,5 +98,21 @@ public class BooksControllerTest {
                 .andExpect(jsonPath("$.name", equalTo("Refactoring")))
                 .andExpect(jsonPath("$.author", equalTo("Martin Fowler")))
         ;
+    }
+
+    @Test
+    public void getBook_passesDataToRepository() throws Exception {
+        SpyBooksRepository spyBooksRepository = new SpyBooksRepository();
+        BooksController booksController = new BooksController(spyBooksRepository);
+
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(booksController)
+                .build();
+
+
+        mockMvc.perform(get("/api/books/dynamic/999"));
+
+
+        assertThat(spyBooksRepository.getGet_argument_id(), equalTo(999L));
     }
 }

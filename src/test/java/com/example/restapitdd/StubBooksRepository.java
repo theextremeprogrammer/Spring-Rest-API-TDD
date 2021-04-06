@@ -19,7 +19,7 @@ public class StubBooksRepository implements BooksRepository {
     }
 
     @Override
-    public Book get() {
+    public Book get(long id) {
         return get_returnValue;
     }
 }
