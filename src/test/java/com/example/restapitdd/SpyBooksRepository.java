@@ -11,7 +11,7 @@ public class SpyBooksRepository implements BooksRepository {
     }
 
     @Override
-    public Book get(long id) {
+    public Book getById(long id) {
         get_argument_id = id;
         return null;
     }

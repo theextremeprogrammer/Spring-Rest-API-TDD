@@ -28,7 +28,7 @@ public class BooksController {
 
     @GetMapping("/dynamic/{id}")
     public Book getBooksDynamic(@PathVariable long id) {
-        return booksRepository.get(id);
+        return booksRepository.getById(id);
     }
 }
 

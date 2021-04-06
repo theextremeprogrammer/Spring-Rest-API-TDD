@@ -12,7 +12,7 @@ public class LocalBooksRepository implements BooksRepository {
     }
 
     @Override
-    public Book get(long id) {
+    public Book getById(long id) {
         return null;
     }
 }
