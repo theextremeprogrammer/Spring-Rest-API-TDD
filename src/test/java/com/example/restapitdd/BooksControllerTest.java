@@ -2,6 +2,7 @@ package com.example.restapitdd;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -11,8 +12,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -114,5 +114,24 @@ public class BooksControllerTest {
 
 
         assertThat(spyBooksRepository.getGet_argument_id(), equalTo(999L));
+    }
+
+    @Test
+    public void getBook_passesDataToRepository_mockito() throws Exception {
+        BooksRepository mockBooksRepository = mock(BooksRepository.class);
+        BooksController booksController = new BooksController(mockBooksRepository);
+
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(booksController)
+                .build();
+
+
+        mockMvc.perform(get("/api/books/dynamic/999"));
+
+
+        ArgumentCaptor<Long> longArgumentCaptor = ArgumentCaptor.forClass(Long.class);
+        verify(mockBooksRepository, times(1)).get(longArgumentCaptor.capture());
+
+        assertThat(longArgumentCaptor.getValue(), equalTo(999L));
     }
 }
