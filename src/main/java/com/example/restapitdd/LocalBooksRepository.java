@@ -10,4 +10,9 @@ public class LocalBooksRepository implements BooksRepository {
     public List<Book> getAll() {
         return null;
     }
+
+    @Override
+    public Book get() {
+        return null;
+    }
 }

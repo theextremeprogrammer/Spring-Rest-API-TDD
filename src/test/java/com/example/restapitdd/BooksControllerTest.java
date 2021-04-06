@@ -30,13 +30,13 @@ public class BooksControllerTest {
     }
 
     @Test
-    public void test_getBooksController_returnsOkHttpStatus() throws Exception {
+    public void test_getBooks_returnsOkHttpStatus() throws Exception {
         mockMvc.perform(get("/api/books/hardcoded"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void test_getBooksController_returnsASingleBook() throws Exception {
+    public void test_getBooks_returnsASingleBook() throws Exception {
         mockMvc.perform(get("/api/books/hardcoded"))
                 .andExpect(jsonPath("$[0].name", equalTo("TDD by Example")))
                 .andExpect(jsonPath("$[0].author", equalTo("Kent Beck")))
@@ -44,15 +44,15 @@ public class BooksControllerTest {
     }
 
     @Test
-    public void test_getBooksController_returnsOkHttpStatus_dynamic() throws Exception {
+    public void test_getBooks_returnsOkHttpStatus_dynamic() throws Exception {
         mockMvc.perform(get("/api/books/dynamic"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void test_getBooksController_returnsASingleBook_dynamic() throws Exception {
+    public void test_getBooks_returnsASingleBook_dynamic() throws Exception {
         stubBooksRepository.setGetAll_returnValue(
-                Collections.singletonList(new Book("Clean Code", "Robert Martin"))
+                singletonList(new Book("Clean Code", "Robert Martin"))
         );
 
         mockMvc.perform(get("/api/books/dynamic"))
@@ -77,6 +77,24 @@ public class BooksControllerTest {
         mockMvc.perform(get("/api/books/dynamic"))
                 .andExpect(jsonPath("$[0].name", equalTo("Clean Code")))
                 .andExpect(jsonPath("$[0].author", equalTo("Robert Martin")))
+        ;
+    }
+
+    @Test
+    public void test_getBook_returnsOkHttpStatus_dynamic() throws Exception {
+        mockMvc.perform(get("/api/books/dynamic/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void test_getBook_returnsASingleBook_dynamic() throws Exception {
+        stubBooksRepository.setGet_returnValue(
+                new Book("Refactoring", "Martin Fowler")
+        );
+
+        mockMvc.perform(get("/api/books/dynamic/1"))
+                .andExpect(jsonPath("$.name", equalTo("Refactoring")))
+                .andExpect(jsonPath("$.author", equalTo("Martin Fowler")))
         ;
     }
 }

@@ -1,8 +1,6 @@
 package com.example.restapitdd;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,11 @@ public class BooksController {
     @GetMapping("/dynamic")
     public List<Book> getBooksDynamic() {
         return booksRepository.getAll();
+    }
+
+    @GetMapping("/dynamic/{id}")
+    public Book getBooksDynamic(@PathVariable long id) {
+        return booksRepository.get();
     }
 }
 
