@@ -1,3 +1,5 @@
 # Spring-Rest-API-TDD
-Example Spring Rest API built using TDD
 
+![Build Status](https://travis-ci.org/derekleerock/Spring-Rest-API-TDD.svg?branch=main)
+
+Example Spring Rest API built using TDD
