@@ -14,7 +14,7 @@ matrix:
       install:
         - ./gradlew assemble
       script:
-        - make tests
+        - make travis-tests
 
     - name: "Java Server Integration Tests"
       os: osx
@@ -23,4 +23,4 @@ matrix:
       install:
         - ./gradlew assemble
       script:
-        - make integrationtests
+        - make travis-integrationtests
