@@ -1,0 +1,26 @@
+---
+cache:
+  bundler: true
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+matrix:
+  include:
+    - name: "Java Server Unit Tests"
+      os: osx
+      language: java
+      jdk: oraclejdk11
+      install:
+        - ./gradlew assemble
+      script:
+        - make tests
+
+    - name: "Java Server Integration Tests"
+      os: osx
+      language: java
+      jdk: oraclejdk11
+      install:
+        - ./gradlew assemble
+      script:
+        - make integrationtests
