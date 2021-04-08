@@ -1,4 +1,4 @@
-package com.example.restapitdd;
+package com.example.restapitdd.books;
 
 import org.springframework.web.bind.annotation.*;
 

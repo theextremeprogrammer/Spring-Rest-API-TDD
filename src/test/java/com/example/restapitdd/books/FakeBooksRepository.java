@@ -1,4 +1,8 @@
-package com.example.restapitdd;
+package com.example.restapitdd.books;
+
+import com.example.restapitdd.books.Book;
+import com.example.restapitdd.books.BooksRepository;
+import com.example.restapitdd.books.NewBook;
 
 import java.util.ArrayList;
 import java.util.List;

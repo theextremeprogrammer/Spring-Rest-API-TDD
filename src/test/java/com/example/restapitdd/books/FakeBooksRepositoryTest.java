@@ -1,4 +1,4 @@
-package com.example.restapitdd;
+package com.example.restapitdd.books;
 
 public class FakeBooksRepositoryTest extends BooksRepositoryContractTestTemplate<FakeBooksRepository> {
     @Override
