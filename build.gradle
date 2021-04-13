@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.8.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
@@ -23,6 +23,13 @@ sourceSets {
 	}
 }
 
+tasks.withType(Test) {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
+
 configurations {
 	integrationTestCompile.extendsFrom testImplementation
 	integrationTestRuntime.extendsFrom testRuntime
@@ -35,19 +42,8 @@ dependencies {
 
 
 task integrationTest(type: Test) {
+	group 'Verification'
 	testClassesDirs = sourceSets.integrationTest.output.classesDirs
 	classpath = sourceSets.integrationTest.runtimeClasspath
 	outputs.upToDateWhen { false }
-}
-
-test {
-	testLogging {
-		events "passed", "skipped", "failed"
-	}
-}
-
-integrationTest {
-	testLogging {
-		events "passed", "skipped", "failed"
-	}
 }

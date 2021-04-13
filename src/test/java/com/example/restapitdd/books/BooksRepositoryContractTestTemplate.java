@@ -1,10 +1,7 @@
 package com.example.restapitdd.books;
 
-import com.example.restapitdd.books.Book;
-import com.example.restapitdd.books.BooksRepository;
-import com.example.restapitdd.books.NewBook;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -17,7 +14,7 @@ public abstract class BooksRepositoryContractTestTemplate<BooksRepositoryType ex
 
     protected abstract BooksRepositoryType createBooksRepository();
 
-    @Before
+    @BeforeEach
     final public void setUp() {
         booksRepository = createBooksRepository();
     }
