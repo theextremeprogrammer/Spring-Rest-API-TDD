@@ -1,7 +1,7 @@
 package com.example.restapitdd.books;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -18,7 +18,7 @@ public class BooksControllerTest {
     private MockMvc mockMvc;
     private StubBooksRepository stubBooksRepository;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         stubBooksRepository = new StubBooksRepository();
         BooksController booksController = new BooksController(stubBooksRepository);
