@@ -152,6 +152,24 @@ public class BooksControllerTest {
     }
 
     @Test
+    public void getBook_returnsNotFoundStatus_whenBookNotFound() throws Exception {
+        StubBooksRepository stubBooksRepository = new StubBooksRepository();
+        stubBooksRepository.set_getById_throwsException(new NotFoundException("Book with id #999 not found."));
+
+        BooksController booksController = new BooksController(stubBooksRepository);
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(booksController)
+                .setControllerAdvice(new RestControllerExceptionHandler())
+                .build();
+
+
+        mockMvc.perform(get("/api/books/dynamic/999"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.errorMessage", equalTo("Book with id #999 not found.")))
+        ;
+    }
+
+    @Test
     public void getBooks_returnsBooks_usingFake() throws Exception {
         FakeBooksRepository fakeBooksRepository = new FakeBooksRepository();
         BooksController booksController = new BooksController(fakeBooksRepository);
